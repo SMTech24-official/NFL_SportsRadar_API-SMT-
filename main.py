@@ -1,7 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-# Import from api_routes.py instead of routes.py to avoid package/module conflict
-from App.api.api_routes import router
+from App.api.api_routes import router as api_router
 from App.core.config import settings
 
 # Create FastAPI app
@@ -23,7 +22,7 @@ app.add_middleware(
 )
 
 # Include API router
-app.include_router(router)
+app.include_router(api_router)
 
 # Root endpoint
 @app.get("/")

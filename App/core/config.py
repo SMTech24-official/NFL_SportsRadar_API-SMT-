@@ -10,12 +10,15 @@ load_dotenv(dotenv_path=env_path)
 # Print environment variables for debugging
 api_key = os.getenv("SPORTSRADAR_API_KEY")
 base_url = os.getenv("NFL_BASE_URL")
+groq_api_key = os.getenv("GROQ_API_KEY")
 print(f"API Key loaded: {'*' * 4}{api_key[-4:] if api_key else 'Not found'}")
 print(f"Base URL loaded: {base_url}")
+print(f"Groq API Key loaded: {'*' * 4}{groq_api_key[-4:] if groq_api_key else 'Not found'}")
 
 class Settings:
     API_KEY: str = api_key
     BASE_URL: str = base_url
+    GROQ_API_KEY: str = groq_api_key
     
     # API Info for Swagger UI
     API_TITLE: str = "NFL Data API"

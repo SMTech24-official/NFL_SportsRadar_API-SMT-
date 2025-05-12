@@ -35,3 +35,12 @@ class PlayerProfileResponse(BaseModel):
     
 class ErrorResponse(BaseModel):
     detail: str
+
+# Change from NFLquery to NFLQuery to match imports
+class NFLQuery(BaseModel):
+    query: str = Field(..., description="Natural language question about NFL data")
+
+class NFLQueryResponse(BaseModel):
+    query: str
+    answer: str
+    data_sources: List[str]

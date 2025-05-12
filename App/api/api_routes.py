@@ -5,6 +5,8 @@ import functools
 
 from App.services.nfl_service import nfl_service
 from App.models.schemas import ErrorResponse
+from App.services.Nfl_query_service import nfl_query_service
+from App.models.schemas import NFLQuery, NFLQueryResponse, ErrorResponse
 
 # Simple in-memory cache for API responses
 cache = {}
@@ -139,3 +141,19 @@ async def get_weekly_injuries(
     - **week**: Week number
     """
     return await nfl_service.get_weekly_injuries(year, season_type, week)
+
+
+@router.post("/query", response_model=NFLQueryResponse, summary="Ask a question about NFL data")
+async def ask_nfl_question(query: NFLQuery):
+    """
+    Ask a natural language question about NFL data and get an AI-powered response.
+    
+    Examples:
+    - "Who are the top quarterbacks this season?"
+    - "What's the injury status for the Chiefs this week?"
+    - "Show me the Packers' upcoming schedule"
+    - "What's the depth chart for the Cowboys?"
+    - "Which teams are playing this weekend?"
+    """
+    response = await nfl_query_service.process_query(query.query)
+    return response
